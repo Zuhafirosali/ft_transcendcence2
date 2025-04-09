@@ -1,0 +1,9 @@
+FROM nginx:alpine
+
+RUN apk add --no-cache certbot certbot-nginx
+
+COPY ./htmlfile/. /usr/share/nginx/html/
+
+COPY ./conf/default.conf /etc/nginx/nginx.conf
+
+CMD ["nginx", "-g", "daemon off;"]

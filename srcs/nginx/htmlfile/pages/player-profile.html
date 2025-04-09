@@ -1,0 +1,60 @@
+<div class="pp-container">
+    <h1 class="pp-h1">Player Profile</h1>
+
+    <div class="pp-card">
+        <h2 class="pp-card-title">Personal Information</h2>
+        <img src="/placeholder.svg?height=128&width=128" alt="Player Avatar" class="pp-avatar" id="pp-avatar-settings">
+
+        <div class="pp-form-group">
+            <label for="pp-photo-upload" class="pp-label">Upload Profile Photo</label>
+            <input type="file" id="pp-photo-upload" class="pp-input" accept="image/*">
+        </div>
+
+        <div class="pp-form-group">
+            <label for="pp-firstName" class="pp-label">First Name</label>
+            <input type="text" id="pp-firstName" class="pp-input" value="">
+        </div>
+        <div class="pp-form-group">
+            <label for="pp-lastName" class="pp-label">Last Name</label>
+            <input type="text" id="pp-lastName" class="pp-input" value="">
+        </div>
+        <div class="pp-form-group">
+            <label for="pp-city" class="pp-label">City</label>
+            <input type="text" id="pp-city" class="pp-input" value="">
+        </div>
+        <div class="pp-form-group">
+            <label for="pp-bio" class="pp-label">Bio</label>
+            <textarea id="pp-bio" class="pp-textarea"
+                rows="4"></textarea>
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+        <button class="pp-button" id="pp-submit" type="button">Save Changes</button>
+        <button class="pp-button pp-button-outline" id="pp-cancel" type="button">Cancel</button>
+    </div>
+    <br><br>
+    <div class="pp-card">
+        <h2 class="pp-card-title">Account Security</h2>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span>Two-Factor Authentication</span>
+            <label class="pp-switch">
+                <input type="checkbox" id="pp-twoFactorAuth">
+                <span class="pp-slider"></span>
+            </label>
+        </div>
+    </div>
+</div>
+
+<div id="twofa-popup" >
+    <h2>Two-Factor Authentication</h2>
+    <div id="qr-code-container"></div>
+    <div class="pp-form-group">
+        <label for="twofa-code" class="pp-label">Enter Code</label>
+        <input type="text" id="twofa-code" class="pp-input" placeholder="Enter the code">
+    </div>
+    <button class="pp-button" id="twofa-submit" type="button">Submit</button>
+    <button class="pp-button pp-button-outline" id="twofa-cancel" type="button">Cancel</button>
+</div>
+
+<div id="overlay"></div>

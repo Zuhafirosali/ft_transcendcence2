@@ -1,0 +1,197 @@
+# version: "3.4"
+networks:
+  transcendence:
+    name: transcendence
+    driver: bridge
+volumes:
+  db_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /tmp/user_db
+  web_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /tmp/authService
+  chat_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /tmp/chatService
+  api_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /tmp/apigateway
+  tournament_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /tmp/tournament
+  match-making:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /tmp/matchmaking
+  game_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /tmp/game
+services:
+  apigateway:
+    container_name: apigateway
+    build: ./apigateway
+    entrypoint: ./start.sh
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - api_data:/apigateway
+    networks:
+      - transcendence
+    depends_on:
+      - user
+  user:
+    container_name: userservice
+    build: ./authService
+    entrypoint: ./start.sh
+    command: python manage.py runserver 0.0.0.0:8001
+    environment:
+      USER_DB_USER: ${USER_DB_USER}
+      USER_DB_PASS: ${USER_DB_PASS}
+      USER_DB_NAME: ${USER_DB_NAME}
+      USER_DB_HOST: ${USER_DB_HOST}
+      USER_DB_PORT: ${USER_DB_PORT}
+      HOST_IP: ${HOST_IP} 
+    ports:
+      - "8001:8001"
+    volumes:
+      - web_data:/authServices
+    networks:
+      - transcendence
+    depends_on:
+      - users_db
+  chat:
+    container_name: chatservice
+    build: ./chatService
+    entrypoint: ./start.sh
+    command: python manage.py runserver 0.0.0.0:8002
+    environment:
+      USER_DB_USER: ${USER_DB_USER}
+      USER_DB_PASS: ${USER_DB_PASS}
+      USER_DB_NAME: ${USER_DB_NAME}
+      USER_DB_HOST: ${USER_DB_HOST}
+      USER_DB_PORT: ${USER_DB_PORT}
+      HOST_IP: ${HOST_IP}
+    ports:
+      - "8002:8002"
+    volumes:
+      - chat_data:/chatServices
+      - ./authService/uploads/:/chatServices/uploads/
+    networks:
+      - transcendence
+    depends_on:
+      - users_db
+      - user
+  tournament:
+    container_name: tournament-app
+    build: ./tournament
+    command: python manage.py runserver 0.0.0.0:8003
+    environment:
+      USER_DB_USER: ${USER_DB_USER}
+      USER_DB_PASS: ${USER_DB_PASS}
+      USER_DB_NAME: ${USER_DB_NAME}
+      USER_DB_HOST: ${USER_DB_HOST}
+      USER_DB_PORT: ${USER_DB_PORT}
+      HOST_IP: ${HOST_IP} 
+    ports:
+      - "8003:8003"
+    volumes:
+      - tournament_data:/tournament-app
+      - ./authService/uploads/:/tournament-app/uploads/
+    networks:
+      - transcendence
+    depends_on:
+      - user
+  pong:
+    container_name: pong-app
+    build: ./game
+    command: python manage.py runserver 0.0.0.0:8005
+    environment:
+      USER_DB_USER: ${USER_DB_USER}
+      USER_DB_PASS: ${USER_DB_PASS}
+      USER_DB_NAME: ${USER_DB_NAME}
+      USER_DB_HOST: ${USER_DB_HOST}
+      USER_DB_PORT: ${USER_DB_PORT}
+      HOST_IP: ${HOST_IP} 
+    ports:
+      - "8005:8005"
+    volumes:
+      - game_data:/pong-app
+      - ./authService/uploads/:/pong-app/uploads/
+    networks:
+      - transcendence
+    depends_on:
+      - user
+  match_making:
+    container_name: match_making
+    build: ./matchmaking
+    command: python manage.py runserver 0.0.0.0:8004
+    environment:
+      USER_DB_USER: ${USER_DB_USER}
+      USER_DB_PASS: ${USER_DB_PASS}
+      USER_DB_NAME: ${USER_DB_NAME}
+      USER_DB_HOST: ${USER_DB_HOST}
+      USER_DB_PORT: ${USER_DB_PORT}
+      HOST_IP: ${HOST_IP} 
+    ports:
+      - "8004:8004"
+    volumes:
+      - match-making:/match-making
+      - ./authService/uploads/:/match-making/uploads/
+    networks:
+      - transcendence
+    depends_on:
+      - user
+      - tournament
+  front_end:
+    container_name: front_end
+    build: ./nginx
+    environment:
+      HOST_IP: ${HOST_IP}
+    restart: always
+    volumes:
+      - ./nginx/conf/default.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf/localhost.key:/etc/ssl/private/localhost.key
+      - ./nginx/conf/localhost.crt:/etc/ssl/certs/localhost.pem
+      - ./nginx/htmlfile:/usr/share/nginx/html
+      - ./nginx/log/:/var/log/nginx/
+    ports:
+      - '443:443'
+    networks:
+      - transcendence
+    depends_on:
+      - user
+  users_db:
+    container_name: users_db
+    image: postgres:16.4
+    restart: always
+    environment:
+      POSTGRES_USER: ${USER_DB_USER}
+      POSTGRES_PASSWORD: ${USER_DB_PASS}
+      POSTGRES_DB: ${USER_DB_NAME}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    networks:
+      - transcendence

@@ -1,0 +1,68 @@
+<div class="idx-container">
+    <main>
+        <!-- <div class="idx-paddle-3d">
+            <div class="idx-paddle"></div>
+        </div> -->
+
+        <div class="idx-game-modes">
+            <div class="idx-game-mode">
+                <h2>
+                    <i class="fas fa-user"></i> vs <i class="fas fa-robot"></i>
+                </h2>
+                <p>Sharpen your skills against a challenging AI opponent. <strong>Results are not recorded, it's just for practice.</strong></p>
+                <a href="/player_ai" onclick="route()">Play Now</a>
+            </div>
+            <div class="idx-game-mode">
+                <h2>
+                    <i class="fas fa-user"></i> vs <i class="fas fa-user"></i>
+                </h2>
+                <p>Challenge your friend in a classic 1v1 showdown. <strong>Results are not recorded, it's just for practice.</strong></p>
+                <a href="/local" onclick="route()">Play Now</a>
+            </div>
+            <div class="idx-game-mode">
+                <h2>
+                    <i class="fas fa-user-alt"></i> vs <i class="fas fa-user-check"></i>
+                </h2>
+                <p>Battle your friends in real-time and prove your skills. <strong>Your performance will be recorded.</strong></p>
+                <a href="#" id="playNowLink">Play Now</a>
+            </div>
+            <div class="idx-game-mode">
+                <h2>
+                    <i class="fas fa-user-alt"></i> vs <i class="fas fa-users"></i>
+                </h2>
+                <p>Join epic tournaments and become the ultimate champion. <strong>Your performance will be recorded.</strong></p>
+                <a href="/tournaments" onclick="route()">Play Now</a>
+            </div>
+        </div>
+        
+
+        <div class="idx-how-to-play">
+            <h2>How to Play Pong</h2>
+            <p>Control your paddle using the arrow keys:</p>
+            <div class="idx-key-controls">
+                <div class="idx-arrow-keys">
+                    <div class="idx-arrow idx-arrow-up">▲</div>
+                    <div class="idx-arrow idx-arrow-down">▼</div>
+                </div>
+                <span>Move paddle up and down</span>
+            </div>
+            <p>Boost your paddle speed by pressing the space bar:</p>
+            <div class="idx-key-controls">
+                <div class="idx-space-bar">Space</div>
+                <span>Double paddle speed</span>
+            </div>
+        </div>
+
+        <div id="matchPopup" class="popup">
+            <div class="popup-content">
+                <h3>Match is being searched for...</h3>
+                <br>
+                <div class="profile-container">
+                    <img src="../static/user-64.png" alt="Default Profile" class="profile-pic">
+                </div>
+                <br><br>
+                <button id="cancelBtn">Cancel</button>
+            </div>
+        </div>
+    </main>
+</div>

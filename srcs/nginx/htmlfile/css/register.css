@@ -1,0 +1,137 @@
+.register-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 4rem 1rem;
+}
+
+.register-header {
+	text-align: center;
+	margin-bottom: 4rem;
+}
+
+.register-title {
+	font-size: 2.75rem;
+	font-weight: bold;
+	margin-bottom: 1rem;
+	letter-spacing: 0.05em;
+}
+
+.register-title span {
+	color: #ed8936;
+}
+
+.register-subtitle {
+	font-size: 1.25rem;
+	color: #90cdf4;
+}
+
+.register-form {
+	background-color: var(--dark-bg);
+	border-radius: 0.5rem;
+	border: 1px solid #3182ce;
+	box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1);
+	padding: 2rem;
+	max-width: 400px;
+	margin: 0 auto;
+}
+
+.register-form-group {
+	margin-bottom: 1.5rem;
+}
+
+.register-form-group label {
+	display: block;
+	margin-bottom: 0.5rem;
+	font-weight: bold;
+}
+
+.register-form-group input {
+	width: 96%;
+	padding: 0.5rem;
+	border: 1px solid #4a5568;
+	border-radius: 0.25rem;
+	background-color: white;
+	color: var(--dark-bg);
+}
+
+.register-form-group input:focus {
+	outline: none;
+	border-color: #3182ce;
+}
+
+.register-submit-button {
+	background-color: white;
+	color: var(--dark-bg);
+	border: none;
+	border-radius: 0.25rem;
+	padding: 0.75rem 1rem;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	width: 100%;
+}
+
+.register-submit-button:hover {
+	background-color: var(--neon-orange);
+}
+
+.register-form-footer {
+	text-align: center;
+	margin-top: 1rem;
+}
+
+.register-form-footer a {
+	color: #63b3ed;
+	text-decoration: none;
+}
+
+.register-form-footer a:hover {
+	text-decoration: underline;
+	color: var(--neon-orange);
+}
+
+@media (max-width: 768px) {
+	.register-title {
+		font-size: 3rem;
+	}
+}
+
+.input-group {
+    position: relative;
+    width: 100%;
+}
+
+.input-group input {
+    width: 88%;
+    padding: 0.5rem;
+    padding-right: 2.5rem; 
+    border: 1px solid #4a5568;
+    border-radius: 0.25rem;
+    background-color: white;
+    color: var(--dark-bg);
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #3182ce;
+}
+
+.input-group .toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: var(--dark-bg);
+}
+
+.input-group .toggle-password:hover {
+    color: #3182ce;
+}
+
+.input-group .toggle-password i {
+    font-size: 1.2rem;
+}

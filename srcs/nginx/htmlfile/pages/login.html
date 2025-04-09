@@ -1,0 +1,56 @@
+<div class="login-container">
+    <!-- <img src="static/ping5-rm.png" class="login-image" alt="Sample image"> -->
+    <div class="blur-container">
+        <div class="col-12">
+            <!-- Login Form -->
+            <form id="login-form" class="login-form" method="post">
+                <div class="text-center mb-4">
+                    <p>Sign in with:</p>
+                    <button type="button" class="btn btn-primary btn-floating mx-1 shadow-sm intrsign" id="login-intra-button">
+                        <div style="display: inline-flex; align-items: center;">
+                            <img src="static/logo.png" alt="Intra logo" class="mr-2 intra-logo">
+                            <span>Intra 42 Login</span>
+                        </div>
+                    </button>
+                </div>
+                <p class="text-center">or:</p>
+                <!-- Username input -->
+                <div class="form-outline mb-4">
+                    <!-- <label for="login-username">Username</label> -->
+                    <input type="text" id="login-username" class="form-control" placeholder="Username" required>
+                </div>
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                    <div class="input-group">
+                        <!-- <label for="login-password">Password</label> -->
+                        <input type="password" id="login-password" class="form-control" placeholder="Password" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                <i class="fas fa-eye"></i> <!-- Default icon -->
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4" id="login-submit-button">Sign in</button>
+            </form>
+            <!-- <div class="row mb-4">
+                <div class="col-md-6 d-flex justify-content-left">
+                    <a href="/forgot-password" onclick="route()">Forgot password?</a>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<!-- 2FA Popup -->
+<div class="popup">
+    <div class="popup-content">
+        <h2>Two-Factor Authentication</h2>
+        <p>Please enter your 2FA code:</p>
+        <input type="text" id="twofa-code" placeholder="Enter 2FA code">
+        <button id="twofa-submit">Submit</button>
+        <br>
+        <button id="twofa-cancel">Cancel</button>
+    </div>
+</div>
